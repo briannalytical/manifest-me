@@ -1,5 +1,8 @@
-package com.example.manifest_me.Model;
+package com.example.manifest_me.model;
 
+import com.example.manifest_me.Model.AppUser;
+import com.example.manifest_me.Model.Contact;
+import com.example.manifest_me.Model.Interview;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,7 +29,9 @@ public class Entry {
 
     public enum Status { APPLIED, SCREENING, INTERVIEWING, OFFER, REJECTED, GHOSTED, WITHDRAWN }
 
+    public enum WorkArrangement { REMOTE, HYBRID, ONSITE }
 
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -36,6 +41,18 @@ public class Entry {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private AppUser user;
+
+    @ManyToMany
+    @JoinTable(
+            name = "entry_contacts",
+            joinColumns = @JoinColumn(name = "entry_id"),
+            inverseJoinColumns = @JoinColumn(name = "contact_id")
+    )
+    private Set<Contact> contacts = new HashSet<>();
+
+    @OneToMany(mappedBy = "entry", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OrderBy("roundNumber ASC")
+    private List<Interview> interviews = new ArrayList<>();
 
 
     // Columns
@@ -59,12 +76,10 @@ public class Entry {
     @Column(name = "job_url", length = 500)
     private String jobUrl;
 
-    public enum WorkArrangement { REMOTE, HYBRID, ONSITE }
-
     @ElementCollection
     @CollectionTable(
-            name = "application_work_arrangements",
-            joinColumns = @JoinColumn(name = "application_id")
+            name = "entry_work_arrangements",
+            joinColumns = @JoinColumn(name = "entry_id")
     )
     @Enumerated(EnumType.STRING)
     @Column(name = "arrangement", nullable = false, length = 20)
@@ -72,8 +87,8 @@ public class Entry {
 
     @ElementCollection
     @CollectionTable(
-            name = "application_locations",
-            joinColumns = @JoinColumn(name = "application_id")
+            name = "entry_locations",
+            joinColumns = @JoinColumn(name = "entry_id")
     )
     @Column(name = "location", nullable = false, length = 200)
     private Set<String> locations = new HashSet<>();
@@ -84,18 +99,6 @@ public class Entry {
     @Column(columnDefinition = "TEXT")
     private String notes;
 
-    @ManyToMany
-    @JoinTable(
-            name = "application_contacts",
-            joinColumns = @JoinColumn(name = "application_id"),
-            inverseJoinColumns = @JoinColumn(name = "contact_id")
-    )
-    private Set<Contact> contacts = new HashSet<>();
-
-    @OneToMany(mappedBy = "application", cascade = CascadeType.ALL, orphanRemoval = true)
-    @OrderBy("scheduledAt ASC")
-    private List<Interview> interviews = new ArrayList<>();
-
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
@@ -103,14 +106,4 @@ public class Entry {
     @UpdateTimestamp
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
-
-
-    // Accessors
-    public Set<WorkArrangement> getWorkArrangements() { return workArrangements; }
-
-    public void setWorkArrangements(Set<WorkArrangement> workArrangements) {this.workArrangements = workArrangements;}
-
-    public Set<String> getLocations() {return locations;}
-
-    public void setLocations(Set<String> locations) {this.locations = locations;}
 }
