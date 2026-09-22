@@ -33,6 +33,7 @@ public class Entry {
     @JoinColumn(name = "user_id", nullable = false)
     private AppUser user;
 
+
     @Column(name = "company_name", nullable = false, length = 200)
     private String companyName;
 
@@ -52,6 +53,15 @@ public class Entry {
 
     @Column(name = "job_url", length = 500)
     private String jobUrl;
+
+    @Column(name = "is_remote", nullable = false)
+    private boolean isRemote = false;
+
+    @Column(name = "is_hybrid", nullable = false)
+    private boolean isHybrid = false;
+
+    @Column(name = "is_onsite", nullable = false)
+    private boolean isOnsite = false;
 
     @Column(length = 200)
     private String location;
