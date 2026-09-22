@@ -24,7 +24,7 @@ public class Interview {
     // Join Conditions
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "entry_id", nullable = false)
-    private com.example.manifest_me.model.Entry entry;
+    private com.example.manifest_me.Model.Entry entry;
 
 
     // Columns

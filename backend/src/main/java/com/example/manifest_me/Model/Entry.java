@@ -1,4 +1,4 @@
-package com.example.manifest_me.model;
+package com.example.manifest_me.Model;
 
 import com.example.manifest_me.Model.AppUser;
 import com.example.manifest_me.Model.Contact;
@@ -66,15 +66,25 @@ public class Entry {
     @Column(name = "source_type", nullable = false, length = 20)
     private Source sourceType = Source.SELF;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 20)
-    private Status status = Status.APPLIED;
-
     @Column(name = "date_applied", nullable = false)
     private LocalDate dateApplied;
 
     @Column(name = "job_url", length = 500)
     private String jobUrl;
+
+    @Column(name = "salary_range", length = 100)
+    private String salaryRange;
+
+    @Column(name = "is_priority", nullable = false)
+    private boolean isPriority = false;
+
+    @Column(columnDefinition = "TEXT")
+    private String notes;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
+    private Status status = Status.APPLIED;
+
 
     @ElementCollection
     @CollectionTable(
@@ -93,11 +103,6 @@ public class Entry {
     @Column(name = "location", nullable = false, length = 200)
     private Set<String> locations = new HashSet<>();
 
-    @Column(name = "salary_range", length = 100)
-    private String salaryRange;
-
-    @Column(columnDefinition = "TEXT")
-    private String notes;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)

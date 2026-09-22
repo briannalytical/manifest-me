@@ -52,7 +52,7 @@ public class Contact {
     private String notes;
 
     @ManyToMany(mappedBy = "contacts")
-    private Set<com.example.manifest_me.model.Entry> applications = new HashSet<>();
+    private Set<com.example.manifest_me.Model.Entry> applications = new HashSet<>();
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
