@@ -23,7 +23,7 @@ public class Entry {
 
     public enum Source { SELF, RECRUITER }
 
-    public enum Status { APPLIED, SCREENING, INTERVIEWING, OFFER, REJECTED, GHOSTED }
+    public enum Status { APPLIED, SCREENING, INTERVIEWING, OFFER, REJECTED }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -98,4 +98,14 @@ public class Entry {
     @UpdateTimestamp
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
+
+
+    // Accessors
+    public Set<WorkArrangement> getWorkArrangements() { return workArrangements; }
+
+    public void setWorkArrangements(Set<WorkArrangement> workArrangements) {this.workArrangements = workArrangements;}
+
+    public Set<String> getLocations() {return locations;}
+
+    public void setLocations(Set<String> locations) {this.locations = locations;}
 }
