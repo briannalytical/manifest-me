@@ -23,12 +23,13 @@ public class Contact {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
+    // Join Conditions
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private AppUser user;
 
 
+    // Columns
     @Column(nullable = false, length = 200)
     private String name;
 

@@ -21,19 +21,24 @@ import java.util.Set;
 @NoArgsConstructor
 public class Entry {
 
+    // Enums
     public enum Source { SELF, RECRUITER }
 
-    public enum Status { APPLIED, SCREENING, INTERVIEWING, OFFER, REJECTED }
+    public enum Status { APPLIED, SCREENING, INTERVIEWING, OFFER, REJECTED, GHOSTED, WITHDRAWN }
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
+    // Join Conditions
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private AppUser user;
 
 
+    // Columns
     @Column(name = "company_name", nullable = false, length = 200)
     private String companyName;
 

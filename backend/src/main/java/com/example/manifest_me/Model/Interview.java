@@ -23,8 +23,8 @@ public class Interview {
 
     // Join Conditions
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "application_id", nullable = false)
-    private Entry application;
+    @JoinColumn(name = "entry_id", nullable = false)
+    private Entry entry;
 
 
     // Columns

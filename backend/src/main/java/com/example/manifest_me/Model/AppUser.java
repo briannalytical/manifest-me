@@ -13,7 +13,7 @@ public class AppUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
+    // Columns
     @Column(nullable = false, unique = true, length = 254)
     private String email;
 
@@ -28,6 +28,7 @@ public class AppUser {
     private Instant createdAt;
 
 
+    // Accessors
     public AppUser() {}
 
     public Long getId() {
