@@ -31,7 +31,7 @@ public class Entry {
 
     public enum WorkArrangement { REMOTE, HYBRID, ONSITE }
 
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
