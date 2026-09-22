@@ -54,17 +54,24 @@ public class Entry {
     @Column(name = "job_url", length = 500)
     private String jobUrl;
 
-    @Column(name = "is_remote", nullable = false)
-    private boolean isRemote = false;
+    public enum WorkArrangement { REMOTE, HYBRID, ONSITE }
 
-    @Column(name = "is_hybrid", nullable = false)
-    private boolean isHybrid = false;
+    @ElementCollection
+    @CollectionTable(
+            name = "application_work_arrangements",
+            joinColumns = @JoinColumn(name = "application_id")
+    )
+    @Enumerated(EnumType.STRING)
+    @Column(name = "arrangement", nullable = false, length = 20)
+    private Set<WorkArrangement> workArrangements = new HashSet<>();
 
-    @Column(name = "is_onsite", nullable = false)
-    private boolean isOnsite = false;
-
-    @Column(length = 200)
-    private String location;
+    @ElementCollection
+    @CollectionTable(
+            name = "application_locations",
+            joinColumns = @JoinColumn(name = "application_id")
+    )
+    @Column(name = "location", nullable = false, length = 200)
+    private Set<String> locations = new HashSet<>();
 
     @Column(name = "salary_range", length = 100)
     private String salaryRange;
