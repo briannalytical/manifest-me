@@ -10,7 +10,7 @@ import java.time.Instant;
 @Entity
 @Table(
         name = "interviews",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"application_id", "round_number"})
+        uniqueConstraints = @UniqueConstraint(columnNames = {"entry_id", "round_number"})
 )
 @Getter
 @Setter
@@ -24,10 +24,13 @@ public class Interview {
     // Join Conditions
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "entry_id", nullable = false)
-    private com.example.manifest_me.Model.Entry entry;
+    private Entry entry;
 
 
     // Columns
+    @Column(name = "round_number", nullable = false)
+    private int roundNumber = 1;
+
     @Column(name = "round_name", nullable = false, length = 100)
     private String roundName;
 
@@ -43,12 +46,6 @@ public class Interview {
     @Column(columnDefinition = "TEXT")
     private String notes;
 
-    @Column(nullable = false)
-    private boolean completed = false;
-
-    @Column(name = "round_number", nullable = false)
-    private int roundNumber = 1;
-
     @Column(name = "completed_at")
     private Instant completedAt;
 
@@ -56,16 +53,12 @@ public class Interview {
     private Instant followUpSentAt;
 
 
-    // Accessors
-    public int getRoundNumber() {return roundNumber;}
+    // Derived
+    public boolean isCompleted() {
+        return completedAt != null;
+    }
 
-    public void setRoundNumber(int roundNumber) {this.roundNumber = roundNumber;}
-
-    public Instant getCompletedAt() {return completedAt;}
-
-    public void setCompletedAt(Instant completedAt) {this.completedAt = completedAt;}
-
-    public Instant getFollowUpSentAt() {return followUpSentAt;}
-
-    public void setFollowUpSentAt(Instant followUpSentAt) {this.followUpSentAt = followUpSentAt;}
+    public boolean isFollowUpSent() {
+        return followUpSentAt != null;
+    }
 }
