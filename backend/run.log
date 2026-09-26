@@ -1,0 +1,140 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------< com.example:manifest-me >-----------------------
+[INFO] Building  0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:4.2.0-M1:run (default-cli) > test-compile @ manifest-me >>>
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ manifest-me ---
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ manifest-me ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ manifest-me ---
+[INFO] skip non existing resourceDirectory /Users/breemcneil/Developer/manifest-me/backend/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ manifest-me ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] <<< spring-boot:4.2.0-M1:run (default-cli) < test-compile @ manifest-me <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:4.2.0-M1:run (default-cli) @ manifest-me ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::             (v4.2.0-M1)
+
+2026-09-26T00:50:50.747-04:00  INFO 2461 --- [manifest-me] [           main] c.e.manifest_me.ManifestMeApplication    : Starting ManifestMeApplication using Java 25 with PID 2461 (/Users/breemcneil/Developer/manifest-me/backend/target/classes started by breemcneil in /Users/breemcneil/Developer/manifest-me/backend)
+2026-09-26T00:50:50.748-04:00  INFO 2461 --- [manifest-me] [           main] c.e.manifest_me.ManifestMeApplication    : No active profile set, falling back to 1 default profile: "default"
+2026-09-26T00:50:50.974-04:00  INFO 2461 --- [manifest-me] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-09-26T00:50:50.981-04:00  INFO 2461 --- [manifest-me] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 4 ms. Found 0 JPA repository interfaces.
+2026-09-26T00:50:51.173-04:00  INFO 2461 --- [manifest-me] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-09-26T00:50:51.179-04:00  INFO 2461 --- [manifest-me] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-09-26T00:50:51.179-04:00  INFO 2461 --- [manifest-me] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-09-26T00:50:51.202-04:00  INFO 2461 --- [manifest-me] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 437 ms
+2026-09-26T00:50:51.239-04:00  INFO 2461 --- [manifest-me] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-09-26T00:50:52.587-04:00  WARN 2461 --- [manifest-me] [           main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/hibernate/autoconfigure/HibernateJpaConfiguration.class]: Failed to initialize dependency 'jdbcSessionDataSourceScriptDatabaseInitializer' of LoadTimeWeaverAware bean 'entityManagerFactory': Error creating bean with name 'jdbcSessionDataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/session/jdbc/autoconfigure/JdbcSessionAutoConfiguration.class]: Failed to instantiate [org.springframework.boot.session.jdbc.autoconfigure.JdbcSessionDataSourceScriptDatabaseInitializer]: Factory method 'jdbcSessionDataSourceScriptDatabaseInitializer' threw exception with message: Failed to determine DatabaseDriver
+2026-09-26T00:50:52.592-04:00  INFO 2461 --- [manifest-me] [           main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2026-09-26T00:50:52.603-04:00  INFO 2461 --- [manifest-me] [           main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-09-26T00:50:52.611-04:00 ERROR 2461 --- [manifest-me] [           main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/hibernate/autoconfigure/HibernateJpaConfiguration.class]: Failed to initialize dependency 'jdbcSessionDataSourceScriptDatabaseInitializer' of LoadTimeWeaverAware bean 'entityManagerFactory': Error creating bean with name 'jdbcSessionDataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/session/jdbc/autoconfigure/JdbcSessionAutoConfiguration.class]: Failed to instantiate [org.springframework.boot.session.jdbc.autoconfigure.JdbcSessionDataSourceScriptDatabaseInitializer]: Factory method 'jdbcSessionDataSourceScriptDatabaseInitializer' threw exception with message: Failed to determine DatabaseDriver
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335) ~[spring-beans-7.1.0-M1.jar:7.1.0-M1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:203) ~[spring-beans-7.1.0-M1.jar:7.1.0-M1]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:978) ~[spring-context-7.1.0-M1.jar:7.1.0-M1]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:622) ~[spring-context-7.1.0-M1.jar:7.1.0-M1]
+	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.2.0-M1.jar:4.2.0-M1]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.2.0-M1.jar:4.2.0-M1]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.2.0-M1.jar:4.2.0-M1]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.2.0-M1.jar:4.2.0-M1]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365) ~[spring-boot-4.2.0-M1.jar:4.2.0-M1]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-4.2.0-M1.jar:4.2.0-M1]
+	at com.example.manifest_me.ManifestMeApplication.main(ManifestMeApplication.java:10) ~[classes/:na]
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jdbcSessionDataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/session/jdbc/autoconfigure/JdbcSessionAutoConfiguration.class]: Failed to instantiate [org.springframework.boot.session.jdbc.autoconfigure.JdbcSessionDataSourceScriptDatabaseInitializer]: Factory method 'jdbcSessionDataSourceScriptDatabaseInitializer' threw exception with message: Failed to determine DatabaseDriver
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:657) ~[spring-beans-7.1.0-M1.jar:7.1.0-M1]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:645) ~[spring-beans-7.1.0-M1.jar:7.1.0-M1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1360) ~[spring-beans-7.1.0-M1.jar:7.1.0-M1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1192) ~[spring-beans-7.1.0-M1.jar:7.1.0-M1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565) ~[spring-beans-7.1.0-M1.jar:7.1.0-M1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.1.0-M1.jar:7.1.0-M1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:346) ~[spring-beans-7.1.0-M1.jar:7.1.0-M1]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.1.0-M1.jar:7.1.0-M1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:344) ~[spring-beans-7.1.0-M1.jar:7.1.0-M1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:198) ~[spring-beans-7.1.0-M1.jar:7.1.0-M1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:322) ~[spring-beans-7.1.0-M1.jar:7.1.0-M1]
+	... 10 common frames omitted
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.boot.session.jdbc.autoconfigure.JdbcSessionDataSourceScriptDatabaseInitializer]: Factory method 'jdbcSessionDataSourceScriptDatabaseInitializer' threw exception with message: Failed to determine DatabaseDriver
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.lambda$instantiate$0(SimpleInstantiationStrategy.java:183) ~[spring-beans-7.1.0-M1.jar:7.1.0-M1]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiateWithFactoryMethod(SimpleInstantiationStrategy.java:72) ~[spring-beans-7.1.0-M1.jar:7.1.0-M1]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:152) ~[spring-beans-7.1.0-M1.jar:7.1.0-M1]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653) ~[spring-beans-7.1.0-M1.jar:7.1.0-M1]
+	... 20 common frames omitted
+Caused by: java.lang.IllegalStateException: Failed to determine DatabaseDriver
+	at org.springframework.boot.jdbc.init.PlatformPlaceholderDatabaseDriverResolver.getDatabaseDriver(PlatformPlaceholderDatabaseDriverResolver.java:144) ~[spring-boot-jdbc-4.2.0-M1.jar:4.2.0-M1]
+	at org.springframework.boot.jdbc.init.PlatformPlaceholderDatabaseDriverResolver.determinePlatform(PlatformPlaceholderDatabaseDriverResolver.java:132) ~[spring-boot-jdbc-4.2.0-M1.jar:4.2.0-M1]
+	at org.springframework.boot.jdbc.init.PlatformPlaceholderDatabaseDriverResolver.lambda$resolveAll$0(PlatformPlaceholderDatabaseDriverResolver.java:97) ~[spring-boot-jdbc-4.2.0-M1.jar:4.2.0-M1]
+	at org.springframework.boot.jdbc.init.PlatformPlaceholderDatabaseDriverResolver.resolveAll(PlatformPlaceholderDatabaseDriverResolver.java:122) ~[spring-boot-jdbc-4.2.0-M1.jar:4.2.0-M1]
+	at org.springframework.boot.jdbc.init.PlatformPlaceholderDatabaseDriverResolver.resolveAll(PlatformPlaceholderDatabaseDriverResolver.java:97) ~[spring-boot-jdbc-4.2.0-M1.jar:4.2.0-M1]
+	at org.springframework.boot.jdbc.init.PropertiesBasedDataSourceScriptDatabaseInitializer.resolveSchemaLocations(PropertiesBasedDataSourceScriptDatabaseInitializer.java:90) ~[spring-boot-jdbc-4.2.0-M1.jar:4.2.0-M1]
+	at org.springframework.boot.jdbc.init.PropertiesBasedDataSourceScriptDatabaseInitializer.getSettings(PropertiesBasedDataSourceScriptDatabaseInitializer.java:75) ~[spring-boot-jdbc-4.2.0-M1.jar:4.2.0-M1]
+	at org.springframework.boot.jdbc.init.PropertiesBasedDataSourceScriptDatabaseInitializer.<init>(PropertiesBasedDataSourceScriptDatabaseInitializer.java:59) ~[spring-boot-jdbc-4.2.0-M1.jar:4.2.0-M1]
+	at org.springframework.boot.session.jdbc.autoconfigure.JdbcSessionDataSourceScriptDatabaseInitializer.<init>(JdbcSessionDataSourceScriptDatabaseInitializer.java:48) ~[spring-boot-session-jdbc-4.2.0-M1.jar:4.2.0-M1]
+	at org.springframework.boot.session.jdbc.autoconfigure.JdbcSessionAutoConfiguration.jdbcSessionDataSourceScriptDatabaseInitializer(JdbcSessionAutoConfiguration.java:73) ~[spring-boot-session-jdbc-4.2.0-M1.jar:4.2.0-M1]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.lambda$instantiate$0(SimpleInstantiationStrategy.java:155) ~[spring-beans-7.1.0-M1.jar:7.1.0-M1]
+	... 23 common frames omitted
+Caused by: org.springframework.jdbc.support.MetaDataAccessException: Could not get Connection for extracting meta-data
+	at org.springframework.jdbc.support.JdbcUtils.extractDatabaseMetaData(JdbcUtils.java:355) ~[spring-jdbc-7.1.0-M1.jar:7.1.0-M1]
+	at org.springframework.boot.jdbc.init.PlatformPlaceholderDatabaseDriverResolver.getDatabaseDriver(PlatformPlaceholderDatabaseDriverResolver.java:140) ~[spring-boot-jdbc-4.2.0-M1.jar:4.2.0-M1]
+	... 35 common frames omitted
+Caused by: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection
+	at org.springframework.jdbc.datasource.DataSourceUtils.getConnection(DataSourceUtils.java:84) ~[spring-jdbc-7.1.0-M1.jar:7.1.0-M1]
+	at org.springframework.jdbc.support.JdbcUtils.extractDatabaseMetaData(JdbcUtils.java:329) ~[spring-jdbc-7.1.0-M1.jar:7.1.0-M1]
+	... 36 common frames omitted
+Caused by: org.postgresql.util.PSQLException: ERROR: password authentication failed for user 'neondb_owner'
+	at org.postgresql.core.v3.ConnectionFactoryImpl.doAuthentication(ConnectionFactoryImpl.java:837) ~[postgresql-42.7.13.jar:42.7.13]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:309) ~[postgresql-42.7.13.jar:42.7.13]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:367) ~[postgresql-42.7.13.jar:42.7.13]
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:52) ~[postgresql-42.7.13.jar:42.7.13]
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:295) ~[postgresql-42.7.13.jar:42.7.13]
+	at org.postgresql.Driver.makeConnection(Driver.java:437) ~[postgresql-42.7.13.jar:42.7.13]
+	at org.postgresql.Driver.connect(Driver.java:305) ~[postgresql-42.7.13.jar:42.7.13]
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:144) ~[HikariCP-7.1.0.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:373) ~[HikariCP-7.1.0.jar:na]
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:210) ~[HikariCP-7.1.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:488) ~[HikariCP-7.1.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:576) ~[HikariCP-7.1.0.jar:na]
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:97) ~[HikariCP-7.1.0.jar:na]
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:111) ~[HikariCP-7.1.0.jar:na]
+	at org.springframework.jdbc.datasource.DataSourceUtils.fetchConnection(DataSourceUtils.java:160) ~[spring-jdbc-7.1.0-M1.jar:7.1.0-M1]
+	at org.springframework.jdbc.datasource.DataSourceUtils.doGetConnection(DataSourceUtils.java:118) ~[spring-jdbc-7.1.0-M1.jar:7.1.0-M1]
+	at org.springframework.jdbc.datasource.DataSourceUtils.getConnection(DataSourceUtils.java:81) ~[spring-jdbc-7.1.0-M1.jar:7.1.0-M1]
+	... 37 common frames omitted
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.844 s
+[INFO] Finished at: 2026-09-26T00:50:52-04:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:4.2.0-M1:run (default-cli) on project manifest-me: Process terminated with exit code: 1 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
