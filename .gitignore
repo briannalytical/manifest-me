@@ -1,0 +1,17 @@
+.idea/
+*.iml
+
+/.vscode/*
+!/.vscode/extensions.json
+
+.DS_Store
+Thumbs.db
+desktop.ini
+*.sw?
+*~
+
+/.env
+/.env.*
+!/.env.example
+
+*.log
