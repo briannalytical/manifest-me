@@ -55,8 +55,7 @@ public class Tip {
   private Instant updatedAt;
 
   // Initialize object
-  public Tip() {
-  }
+  public Tip() {}
 
   // Accessors
   public Long getId() {

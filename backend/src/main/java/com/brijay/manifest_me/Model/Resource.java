@@ -53,8 +53,7 @@ public class Resource {
   @Column(name = "created_at", nullable = false, updatable = false)
   private Instant createdAt;
 
-  public Resource() {
-  }
+  public Resource() {}
 
   // Accessors
   public Long getId() {
