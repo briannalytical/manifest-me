@@ -1,6 +1,6 @@
 {
   "Exclude": [
-    "^\\.idea/"
+    "(^|/)\\.idea/"
   ],
   "Disable": {
     "MaxLineLength": true
