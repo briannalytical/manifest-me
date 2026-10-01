@@ -1,18 +1,34 @@
 package com.brijay.manifest_me.Model;
 
-import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OrderBy;
+import jakarta.persistence.Table;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "entries")
@@ -21,91 +37,94 @@ import java.util.Set;
 @NoArgsConstructor
 public class Entry {
 
-    // Enums
-    public enum Source { SELF, RECRUITER }
+  // Enums
+  public enum Source {
+    SELF,
+    RECRUITER
+  }
 
-    public enum Status { APPLIED, SCREENING, INTERVIEWING, OFFER, REJECTED, GHOSTED, WITHDRAWN }
+  public enum Status {
+    APPLIED,
+    SCREENING,
+    INTERVIEWING,
+    OFFER,
+    REJECTED,
+    GHOSTED,
+    WITHDRAWN
+  }
 
-    public enum WorkArrangement { REMOTE, HYBRID, ONSITE }
+  public enum WorkArrangement {
+    REMOTE,
+    HYBRID,
+    ONSITE
+  }
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  // Join Conditions
+  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @JoinColumn(name = "user_id", nullable = false)
+  private AppUser user;
 
+  @ManyToMany
+  @JoinTable(
+      name = "entry_contacts",
+      joinColumns = @JoinColumn(name = "entry_id"),
+      inverseJoinColumns = @JoinColumn(name = "contact_id"))
+  private Set<Contact> contacts = new HashSet<>();
 
-    // Join Conditions
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
-    private AppUser user;
+  @OneToMany(mappedBy = "entry", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OrderBy("roundNumber ASC")
+  private List<Interview> interviews = new ArrayList<>();
 
-    @ManyToMany
-    @JoinTable(
-            name = "entry_contacts",
-            joinColumns = @JoinColumn(name = "entry_id"),
-            inverseJoinColumns = @JoinColumn(name = "contact_id")
-    )
-    private Set<Contact> contacts = new HashSet<>();
+  // Columns
+  @Column(name = "company_name", nullable = false, length = 200)
+  private String companyName;
 
-    @OneToMany(mappedBy = "entry", cascade = CascadeType.ALL, orphanRemoval = true)
-    @OrderBy("roundNumber ASC")
-    private List<Interview> interviews = new ArrayList<>();
+  @Column(name = "position_title", nullable = false, length = 200)
+  private String positionTitle;
 
+  @Enumerated(EnumType.STRING)
+  @Column(name = "source_type", nullable = false, length = 20)
+  private Source sourceType = Source.SELF;
 
-    // Columns
-    @Column(name = "company_name", nullable = false, length = 200)
-    private String companyName;
+  @Column(name = "date_applied", nullable = false)
+  private LocalDate dateApplied;
 
-    @Column(name = "position_title", nullable = false, length = 200)
-    private String positionTitle;
+  @Column(name = "job_url", length = 500)
+  private String jobUrl;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "source_type", nullable = false, length = 20)
-    private Source sourceType = Source.SELF;
+  @Column(name = "salary_range", length = 100)
+  private String salaryRange;
 
-    @Column(name = "date_applied", nullable = false)
-    private LocalDate dateApplied;
+  @Column(name = "is_priority", nullable = false)
+  private boolean isPriority = false;
 
-    @Column(name = "job_url", length = 500)
-    private String jobUrl;
+  @Column(columnDefinition = "TEXT")
+  private String notes;
 
-    @Column(name = "salary_range", length = 100)
-    private String salaryRange;
+  @Enumerated(EnumType.STRING)
+  @Column(nullable = false, length = 20)
+  private Status status = Status.APPLIED;
 
-    @Column(name = "is_priority", nullable = false)
-    private boolean isPriority = false;
+  @ElementCollection
+  @CollectionTable(name = "entry_work_arrangements", joinColumns = @JoinColumn(name = "entry_id"))
+  @Enumerated(EnumType.STRING)
+  @Column(name = "arrangement", nullable = false, length = 20)
+  private Set<WorkArrangement> workArrangements = new HashSet<>();
 
-    @Column(columnDefinition = "TEXT")
-    private String notes;
+  @ElementCollection
+  @CollectionTable(name = "entry_locations", joinColumns = @JoinColumn(name = "entry_id"))
+  @Column(name = "location", nullable = false, length = 200)
+  private Set<String> locations = new HashSet<>();
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 20)
-    private Status status = Status.APPLIED;
+  @CreationTimestamp
+  @Column(name = "created_at", nullable = false, updatable = false)
+  private Instant createdAt;
 
-
-    @ElementCollection
-    @CollectionTable(
-            name = "entry_work_arrangements",
-            joinColumns = @JoinColumn(name = "entry_id")
-    )
-    @Enumerated(EnumType.STRING)
-    @Column(name = "arrangement", nullable = false, length = 20)
-    private Set<WorkArrangement> workArrangements = new HashSet<>();
-
-    @ElementCollection
-    @CollectionTable(
-            name = "entry_locations",
-            joinColumns = @JoinColumn(name = "entry_id")
-    )
-    @Column(name = "location", nullable = false, length = 200)
-    private Set<String> locations = new HashSet<>();
-
-
-    @CreationTimestamp
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private Instant createdAt;
-
-    @UpdateTimestamp
-    @Column(name = "updated_at", nullable = false)
-    private Instant updatedAt;
+  @UpdateTimestamp
+  @Column(name = "updated_at", nullable = false)
+  private Instant updatedAt;
 }
