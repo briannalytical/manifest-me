@@ -1,4 +1,4 @@
-package com.brijay.manifest_me.Model;
+package com.brijay.manifestme.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

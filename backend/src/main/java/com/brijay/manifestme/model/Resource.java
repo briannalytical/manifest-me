@@ -1,4 +1,4 @@
-package com.brijay.manifest_me.Model;
+package com.brijay.manifestme.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,19 +10,19 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.time.Instant;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name = "tips")
-public class Tip {
+@Table(name = "resources")
+public class Resource {
 
   public enum Category {
-    APPLYING,
-    INTERVIEWING,
-    NEGOTIATING,
+    RESUME,
+    COVER_LETTER,
+    JOB_BOARD,
+    INTERVIEW_PREP,
     NETWORKING,
-    MINDSET,
-    FOLLOW_UP
+    SALARY,
+    LEARNING
   }
 
   @Id
@@ -33,8 +33,11 @@ public class Tip {
   @Column(nullable = false, length = 200)
   private String title;
 
-  @Column(nullable = false, columnDefinition = "TEXT")
-  private String body;
+  @Column(columnDefinition = "TEXT")
+  private String description;
+
+  @Column(nullable = false, length = 500)
+  private String url;
 
   @Enumerated(EnumType.STRING)
   @Column(nullable = false, length = 30)
@@ -50,12 +53,7 @@ public class Tip {
   @Column(name = "created_at", nullable = false, updatable = false)
   private Instant createdAt;
 
-  @UpdateTimestamp
-  @Column(name = "updated_at", nullable = false)
-  private Instant updatedAt;
-
-  // Initialize object
-  public Tip() {}
+  public Resource() {}
 
   // Accessors
   public Long getId() {
@@ -70,12 +68,20 @@ public class Tip {
     this.title = title;
   }
 
-  public String getBody() {
-    return body;
+  public String getDescription() {
+    return description;
   }
 
-  public void setBody(String body) {
-    this.body = body;
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public String getUrl() {
+    return url;
+  }
+
+  public void setUrl(String url) {
+    this.url = url;
   }
 
   public Category getCategory() {
@@ -104,9 +110,5 @@ public class Tip {
 
   public Instant getCreatedAt() {
     return createdAt;
-  }
-
-  public Instant getUpdatedAt() {
-    return updatedAt;
   }
 }
