@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ExternalDependencies">
+    <plugin id="Lombook Plugin" />
     <plugin id="google-java-format" min-version="1.36.1.0" />
   </component>
 </project>
