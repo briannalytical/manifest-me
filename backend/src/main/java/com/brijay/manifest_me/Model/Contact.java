@@ -1,4 +1,4 @@
-package com.example.manifest_me.Model;
+package com.brijay.manifest_me.Model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -52,7 +52,7 @@ public class Contact {
     private String notes;
 
     @ManyToMany(mappedBy = "contacts")
-    private Set<com.example.manifest_me.Model.Entry> applications = new HashSet<>();
+    private Set<Entry> applications = new HashSet<>();
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)

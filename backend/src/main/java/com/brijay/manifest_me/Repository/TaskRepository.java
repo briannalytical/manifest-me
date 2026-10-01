@@ -1,6 +1,6 @@
-package com.example.manifest_me.Repository;
+package com.brijay.manifest_me.Repository;
 
-import com.example.manifest_me.model.Task;
+import com.brijay.manifest_me.Model.Task;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

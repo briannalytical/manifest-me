@@ -1,4 +1,4 @@
-package com.example.manifest_me.Model;
+package com.brijay.manifest_me.Model;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;

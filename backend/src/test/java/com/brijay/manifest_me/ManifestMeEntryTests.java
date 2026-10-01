@@ -1,4 +1,4 @@
-package com.example.manifest_me;
+package com.brijay.manifest_me;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

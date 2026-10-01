@@ -1,7 +1,5 @@
-package com.example.manifest_me.model;
+package com.brijay.manifest_me.Model;
 
-import com.example.manifest_me.Model.AppUser;
-import com.example.manifest_me.Model.Entry;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
