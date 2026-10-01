@@ -1,29 +1,38 @@
-package com.brijay.manifest_me.Model;
+package com.brijay.manifestme.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.time.Instant;
-import java.util.HashSet;
-import java.util.Set;
+import java.time.LocalDate;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
-@Table(name = "contacts")
+@Table(name = "tasks")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Contact {
+public class Task {
+
+  public enum Kind {
+    FOLLOW_UP,
+    PREP,
+    APPLY,
+    RESEARCH,
+    THANK_YOU,
+    OTHER
+  }
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,30 +43,26 @@ public class Contact {
   @JoinColumn(name = "user_id", nullable = false)
   private AppUser user;
 
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "entry_id")
+  private Entry entry;
+
   // Columns
   @Column(nullable = false, length = 200)
-  private String name;
-
-  @Column(length = 200)
-  private String role;
-
-  @Column(name = "company_name", length = 200)
-  private String companyName;
-
-  @Column(length = 254, nullable = true)
-  private String email;
-
-  @Column(length = 50, nullable = true)
-  private String phone;
-
-  @Column(name = "is_recruiter", nullable = false)
-  private boolean recruiter = false;
+  private String title;
 
   @Column(columnDefinition = "TEXT")
   private String notes;
 
-  @ManyToMany(mappedBy = "contacts")
-  private Set<Entry> applications = new HashSet<>();
+  @Enumerated(EnumType.STRING)
+  @Column(nullable = false, length = 20)
+  private Kind kind = Kind.OTHER;
+
+  @Column(name = "due_date")
+  private LocalDate dueDate;
+
+  @Column(name = "completed_at")
+  private Instant completedAt;
 
   @CreationTimestamp
   @Column(name = "created_at", nullable = false, updatable = false)

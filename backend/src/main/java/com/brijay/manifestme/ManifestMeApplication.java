@@ -1,4 +1,4 @@
-package com.brijay.manifest_me;
+package com.brijay.manifestme;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

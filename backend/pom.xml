@@ -10,7 +10,7 @@
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
   <groupId>com.brijay</groupId>
-  <artifactId>manifest_me</artifactId>
+  <artifactId>manifest-me</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name/>
   <description/>

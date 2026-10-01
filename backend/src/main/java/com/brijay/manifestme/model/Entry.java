@@ -1,4 +1,4 @@
-package com.brijay.manifest_me.Model;
+package com.brijay.manifestme.model;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
@@ -100,7 +100,7 @@ public class Entry {
   private String salaryRange;
 
   @Column(name = "is_priority", nullable = false)
-  private boolean isPriority = false;
+  private boolean priority = false;
 
   @Column(columnDefinition = "TEXT")
   private String notes;

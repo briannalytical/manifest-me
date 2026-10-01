@@ -1,10 +1,10 @@
-package com.brijay.manifest_me;
+package com.brijay.manifestme;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ManifestMeEntryTests {
+class ManifestMeApplicationTest {
 
   @Test
   void contextLoads() {}

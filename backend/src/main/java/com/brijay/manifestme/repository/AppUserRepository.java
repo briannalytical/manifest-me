@@ -1,6 +1,6 @@
-package com.brijay.manifest_me.Repository;
+package com.brijay.manifestme.repository;
 
-import com.brijay.manifest_me.Model.AppUser;
+import com.brijay.manifestme.model.AppUser;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
