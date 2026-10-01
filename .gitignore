@@ -1,8 +1,10 @@
-.idea/
+.idea/*
+!.idea/codeStyles/
+!.idea/google-java-format.xml
+!.idea/externalDependencies.xml
 *.iml
 
-/.vscode/*
-!/.vscode/extensions.json
+.vscode/
 
 .DS_Store
 Thumbs.db

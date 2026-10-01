@@ -6,16 +6,14 @@ const router = createRouter({
     {
       path: '/',
       name: 'landing',
-      component: () => import('@/views/LandingPageView.vue')
+      component: () => import('@/views/LandingPageView.vue'),
     },
     {
       path: '/home',
       name: 'home',
-      component: () => import('@/views/HomeView.vue')
+      component: () => import('@/views/HomeView.vue'),
     },
   ],
 })
-
-
 
 export default router
