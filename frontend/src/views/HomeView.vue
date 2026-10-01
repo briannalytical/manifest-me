@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import TitleHeader from '@/components/TitleHeader.vue'
+import TextContent from '@/components/TextContent.vue'
 import AnalyticsDisplay from '@/components/AnalyticsDisplay.vue'
-import SectionButton from '@/components/SectionButton.vue'
+import SectionHyperlinkButton from '@/components/SectionHyperlinkButton.vue'
 
 const sections = [
   { label: 'Enter', to: '/entries/new', variant: 'enter' },
@@ -20,7 +21,7 @@ const sections = [
     <AnalyticsDisplay />
 
     <div class="section-grid">
-      <SectionButton
+      <SectionHyperlinkButton
         v-for="section in sections"
         :key="section.to"
         :label="section.label"
