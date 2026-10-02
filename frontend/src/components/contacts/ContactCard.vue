@@ -20,7 +20,7 @@ const draft = ref<ContactInput>({
   companyName: props.initial?.companyName ?? null,
   email: props.initial?.email ?? null,
   phone: props.initial?.phone ?? null,
-  linkedinUrl: props.initial?.linkedinUrl ?? null,
+  linkedinUrl: props.initial?.linkedInUrl ?? null,
   recruiter: props.initial?.recruiter ?? false,
   notes: props.initial?.notes ?? null,
 })
@@ -62,7 +62,7 @@ function submit() {
 
       <div class="field">
         <label for="contactLinkedin">LinkedIn URL</label>
-        <input id="contactLinkedin" v-model="draft.linkedinUrl" type="url" />
+        <input id="contactLinkedin" v-model="draft.linkedInUrl" type="url" />
       </div>
 
       <ToggleSwitch v-model="draft.recruiter" class="field--full">

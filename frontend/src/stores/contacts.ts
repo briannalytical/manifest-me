@@ -1,3 +1,5 @@
+// This is placeholder data
+
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import type { Contact, ContactInput } from '@/types/contact'
