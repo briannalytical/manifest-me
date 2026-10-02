@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import type { Tip } from '@/types/tip'
-import TipsCard from '@/components/tips/TipsCard.vue'
+import TipsCard from '@/components/tips/TipCard.vue'
 
 const props = defineProps<{
   tips: Tip[]
