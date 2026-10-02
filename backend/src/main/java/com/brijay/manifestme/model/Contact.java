@@ -38,7 +38,7 @@ public class Contact {
   @Column(nullable = false, length = 200)
   private String name;
 
-  @Column(length = 200)
+  @Column(length = 200, nullable = true)
   private String role;
 
   @Column(name = "company_name", length = 200)
@@ -50,10 +50,13 @@ public class Contact {
   @Column(length = 50, nullable = true)
   private String phone;
 
+  @Column(length = 500, nullable = true)
+  private String linkedInUrl
+
   @Column(name = "is_recruiter", nullable = false)
   private boolean recruiter = false;
 
-  @Column(columnDefinition = "TEXT")
+  @Column(columnDefinition = "TEXT", nullable = true)
   private String notes;
 
   @ManyToMany(mappedBy = "contacts")
