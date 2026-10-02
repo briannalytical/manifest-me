@@ -18,16 +18,20 @@ const sections = [
   <TitleHeader :is-logged-in="true" />
 
   <main class="home">
-    <AnalyticsDisplay />
+    <div class="container">
+      <div class="title-container"></div>
+      <AnalyticsDisplay />
+      <SectionHyperlinkButton />
 
-    <div class="section-grid">
-      <SectionHyperlinkButton
-        v-for="section in sections"
-        :key="section.to"
-        :label="section.label"
-        :to="section.to"
-        :variant="section.variant"
-      />
+      <div class="section-grid">
+        <SectionHyperlinkButton
+          v-for="section in sections"
+          :key="section.to"
+          :label="section.label"
+          :to="section.to"
+          :variant="section.variant"
+        />
+      </div>
     </div>
   </main>
 </template>
