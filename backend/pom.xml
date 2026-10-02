@@ -31,6 +31,15 @@
     <java.version>21</java.version>
     <spotless.version>3.10.2</spotless.version>
     <google-java-format.version>1.36.1</google-java-format.version>
+
+    <!--
+    https://www.mend.io/vulnerability-database/CVE-2026-89407/
+    https://www.mend.io/vulnerability-database/CVE-2026-91776/
+
+    pin jackson dependency to 3.1.7 to pull fix for vulnerability CVE-2026-89407 & CVE-2026-89425
+    BOOT 4.2.0-M2 pulls in 3.1.6. Remove once spring-boot updates dependency to 3.1.7+
+    -->
+    <jackson-bom.version>3.1.7</jackson-bom.version>
   </properties>
   <dependencies>
     <dependency>
