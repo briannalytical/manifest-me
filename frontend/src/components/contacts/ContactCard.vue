@@ -1,103 +1,139 @@
 <script setup lang="ts">
-import type { Contact } from '@/types/contact'
+import { computed, ref } from 'vue'
+import type { Contact, ContactInput } from '@/types/contact'
+import SaveDataButton from '@/components/SaveDataButton.vue'
+import CloseComponentButton from '@/components/CloseComponentButton.vue'
+import ToggleSwitch from '@/components/ToggleSwitch.vue'
 
-defineProps<{
-  contact: Contact
+const props = defineProps<{
+  initial?: Contact
 }>()
+
+const emit = defineEmits<{
+  submit: [value: ContactInput]
+  cancel: []
+}>()
+
+const draft = ref<ContactInput>({
+  name: props.initial?.name ?? '',
+  role: props.initial?.role ?? null,
+  companyName: props.initial?.companyName ?? null,
+  email: props.initial?.email ?? null,
+  phone: props.initial?.phone ?? null,
+  linkedinUrl: props.initial?.linkedinUrl ?? null,
+  recruiter: props.initial?.recruiter ?? false,
+  notes: props.initial?.notes ?? null,
+})
+
+const canSave = computed(() => draft.value.name.trim().length > 0)
+
+function submit() {
+  if (canSave.value) emit('submit', { ...draft.value })
+}
 </script>
 
 <template>
-  <article class="contact-card">
-    <header class="contact-card__header">
-      <div>
-        <h3 class="contact-card__name">
-          {{ contact.name }}
-          <span v-if="contact.recruiter" class="badge">Recruiter</span>
-        </h3>
-        <p v-if="contact.role || contact.companyName" class="contact-card__meta">
-          {{ [contact.role, contact.companyName].filter(Boolean).join(' · ') }}
-        </p>
+  <div class="contact-form">
+    <div class="fields">
+      <div class="field">
+        <label for="contactName">Name</label>
+        <input id="contactName" v-model="draft.name" type="text" required />
       </div>
-      <div class="contact-card__actions">
-        <slot name="actions" />
+
+      <div class="field">
+        <label for="contactRole">Role</label>
+        <input id="contactRole" v-model="draft.role" type="text" />
       </div>
-    </header>
 
-    <ul v-if="contact.email || contact.phone || contact.linkedInUrl" class="contact-card__details">
-      <li v-if="contact.email">
-        <a :href="`mailto:${contact.email}`">{{ contact.email }}</a>
-      </li>
-      <li v-if="contact.phone">
-        <a :href="`tel:${contact.phone}`">{{ contact.phone }}</a>
-      </li>
-      <li v-if="contact.linkedInUrl">
-        <a :href="contact.linkedInUrl" target="_blank" rel="noopener">LinkedIn</a>
-      </li>
-    </ul>
+      <div class="field">
+        <label for="contactCompany">Company</label>
+        <input id="contactCompany" v-model="draft.companyName" type="text" />
+      </div>
 
-    <p v-if="contact.notes" class="contact-card__notes">{{ contact.notes }}</p>
-  </article>
+      <div class="field">
+        <label for="contactEmail">Email</label>
+        <input id="contactEmail" v-model="draft.email" type="email" />
+      </div>
+
+      <div class="field">
+        <label for="contactPhone">Phone</label>
+        <input id="contactPhone" v-model="draft.phone" type="tel" />
+      </div>
+
+      <div class="field">
+        <label for="contactLinkedin">LinkedIn URL</label>
+        <input id="contactLinkedin" v-model="draft.linkedinUrl" type="url" />
+      </div>
+
+      <ToggleSwitch v-model="draft.recruiter" class="field--full">
+        This person is a recruiter
+      </ToggleSwitch>
+
+      <div class="field field--full">
+        <label for="contactNotes">Notes</label>
+        <textarea id="contactNotes" v-model="draft.notes"></textarea>
+      </div>
+    </div>
+
+    <div class="actions">
+      <CloseComponentButton @click="emit('cancel')">Cancel</CloseComponentButton>
+      <SaveDataButton :disabled="!canSave" @click="submit" />
+    </div>
+  </div>
 </template>
 
 <style scoped>
-.contact-card {
+.contact-form {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 1.25rem;
   padding: 1.25rem;
   border: 1px solid #ddd;
   border-radius: 12px;
+  background: #fafafa;
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.field--full {
+  grid-column: 1 / -1;
+}
+
+label {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='tel'],
+input[type='url'],
+textarea {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
   background: #fff;
+  font: inherit;
 }
 
-.contact-card__header {
+textarea {
+  min-height: 5rem;
+  resize: vertical;
+}
+
+.actions {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 1rem;
-}
-
-.contact-card__name {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin: 0;
-  font-size: 1.1rem;
-  font-weight: 500;
-}
-
-.badge {
-  padding: 0.125rem 0.5rem;
-  border-radius: 999px;
-  background: #eeedfe;
-  color: #3c3489;
-  font-size: 0.75rem;
-  font-weight: 500;
-}
-
-.contact-card__meta {
-  margin-top: 0.25rem;
-  color: #666;
-  font-size: 0.9rem;
-}
-
-.contact-card__actions {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.contact-card__details {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  font-size: 0.9rem;
-}
-
-.contact-card__notes {
-  color: #444;
-  font-size: 0.9rem;
+  justify-content: flex-end;
+  gap: 0.75rem;
 }
 </style>
