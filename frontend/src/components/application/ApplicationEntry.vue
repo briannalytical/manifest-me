@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import BasicInfoTab from '@/components/application/ApplicationBasicInfoTab.vue'
-import ContactsTab from '@/components/application/ApplicationContactTab.vue'
-import LineageTab from '@/components/application/ApplicationLineageTab.vue'
-import TasksTab from '@/components/application/ApplicationTasksTab.vue'
+import ApplicationBasicInfoTab from '@/components/application/ApplicationBasicInfoTab.vue'
+import ApplicationContactTab from '@/components/application/ApplicationContactTab.vue'
+import ApplicationLineageTab from '@/components/application/ApplicationLineageTab.vue'
+import ApplicationTasks from '@/components/application/ApplicationTasks.vue'
+import SaveDataButton from '@/components/SaveDataButton.vue'
+import CloseComponentButton from '@/components/CloseComponentButton.vue'
+import type { EntryInput } from '@/types/entry'
 
 type TabKey = 'basic' | 'contacts' | 'lineage' | 'tasks'
 
@@ -23,7 +26,24 @@ const tabs: { key: TabKey; label: string }[] = [
   { key: 'tasks', label: 'Tasks' },
 ]
 
+function emptyEntry(): EntryInput {
+  return {
+    companyName: '',
+    positionTitle: '',
+    sourceType: 'SELF',
+    status: 'APPLIED',
+    dateApplied: new Date().toLocaleDateString('en-CA'),
+    jobUrl: null,
+    workArrangements: [],
+    locations: [],
+    salaryRange: null,
+    notes: null,
+  }
+}
+
 const activeTab = ref<TabKey>('basic')
+
+const draft = ref<EntryInput>(emptyEntry())
 
 const isEditing = computed(() => props.entryId !== undefined)
 </script>
@@ -46,15 +66,15 @@ const isEditing = computed(() => props.entryId !== undefined)
         </nav>
 
         <section class="tab-content">
-          <BasicInfoTab v-if="activeTab === 'basic'" :entry-id="entryId" />
-          <ContactsTab v-else-if="activeTab === 'contacts'" :entry-id="entryId" />
-          <LineageTab v-else-if="activeTab === 'lineage'" :entry-id="entryId" />
-          <TasksTab v-else-if="activeTab === 'tasks'" :entry-id="entryId" />
+          <ApplicationBasicInfoTab v-if="activeTab === 'basic'" v-model="draft" />
+          <ApplicationContactTab v-else-if="activeTab === 'contacts'" :entry-id="entryId" />
+          <ApplicationLineageTab v-else-if="activeTab === 'lineage'" :entry-id="entryId" />
+          <ApplicationTasks v-else-if="activeTab === 'tasks'" :entry-id="entryId" />
         </section>
 
         <footer class="actions">
-          <button class="btn" @click="emit('close')">Cancel</button>
-          <button class="btn btn--primary" @click="emit('saved')">Save</button>
+          <CloseComponentButton @click="emit('close')" />
+          <SaveDataButton @click="emit('saved')" />
         </footer>
       </div>
     </div>
@@ -120,19 +140,5 @@ const isEditing = computed(() => props.entryId !== undefined)
   gap: 0.75rem;
   padding: 1rem 1.5rem;
   border-top: 1px solid #ddd;
-}
-
-.btn {
-  padding: 0.5rem 1.25rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  background: #fff;
-  cursor: pointer;
-}
-
-.btn--primary {
-  background: #333;
-  color: #fff;
-  border-color: #333;
 }
 </style>

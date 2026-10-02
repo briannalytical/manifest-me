@@ -13,8 +13,8 @@ export type WorkArrangement = 'REMOTE' | 'HYBRID' | 'ONSITE'
 
 export interface Entry {
   id: number
-  companyName: string
   positionTitle: string
+  companyName: string
   sourceType: Source
   status: Status
   dateApplied: string
