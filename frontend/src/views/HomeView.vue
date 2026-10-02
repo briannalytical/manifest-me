@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import TitleHeader from '@/components/TitleHeader.vue'
-import TextContent from '@/components/TextContent.vue'
 import AnalyticsDisplay from '@/components/AnalyticsDisplay.vue'
 import SectionHyperlinkButton from '@/components/SectionHyperlinkButton.vue'
 
@@ -15,14 +14,10 @@ const sections = [
 </script>
 
 <template>
-  <TitleHeader :is-logged-in="true" />
-
   <main class="home">
-    <div class="container">
-      <div class="title-container"></div>
-      <AnalyticsDisplay />
-      <SectionHyperlinkButton />
-
+    <TitleHeader :is-logged-in="true" />
+    <div class="content">
+      <div class="analytics-wrapper"><AnalyticsDisplay /></div>
       <div class="section-grid">
         <SectionHyperlinkButton
           v-for="section in sections"
