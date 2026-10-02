@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import BasicInfoTab from '@/components/application/BasicInfoTab.vue'
-import ContactsTab from '@/components/application/ContactsTab.vue'
-import LineageTab from '@/components/application/LineageTab.vue'
-import TasksTab from '@/components/application/TasksTab.vue'
+import BasicInfoTab from '@/components/application/ApplicationBasicInfoTab.vue'
+import ContactsTab from '@/components/application/ApplicationContactTab.vue'
+import LineageTab from '@/components/application/ApplicationLineageTab.vue'
+import TasksTab from '@/components/application/ApplicationTasksTab.vue'
 
 type TabKey = 'basic' | 'contacts' | 'lineage' | 'tasks'
 
