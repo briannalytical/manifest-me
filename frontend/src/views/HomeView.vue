@@ -19,7 +19,7 @@ const sections = [
     <div class="content">
       <div class="analytics-wrapper"><AnalyticsDisplay /></div>
       <div class="section-grid">
-        <SectionHyperlinkButton />
+        <SectionHyperlinkButton
           v-for="section in sections"
           :key="section.to"
           :label="section.label"
