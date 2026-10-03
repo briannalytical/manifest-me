@@ -1,16 +1,11 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import TitleHeader from '@/components/TitleHeader.vue'
 import AnalyticsDisplay from '@/components/AnalyticsDisplay.vue'
 import SectionHyperlinkButton from '@/components/SectionHyperlinkButton.vue'
+import ApplicationEntry from '@/components/application/ApplicationEntry.vue'
 
-const sections = [
-  { label: 'Enter', to: '/entries/new', variant: 'enter' },
-  { label: 'View / edit', to: '/entries', variant: 'entries' },
-  { label: 'Tasks', to: '/tasks', variant: 'tasks' },
-  { label: 'Contact book', to: '/contacts', variant: 'contacts' },
-  { label: 'Upskill', to: '/resources', variant: 'upskill' },
-  { label: 'Job search tips', to: '/tips', variant: 'tips' },
-]
+const showEntry = ref(false)
 </script>
 
 <template>
@@ -20,19 +15,62 @@ const sections = [
       <div class="analytics-wrapper"><AnalyticsDisplay /></div>
       <div class="section-grid">
         <SectionHyperlinkButton
-          v-for="section in sections"
-          :key="section.to"
-          :label="section.label"
-          :to="section.to"
-          :variant="section.variant"
+          class=""
+          label="Enter"
+          variant="enter"
+          @click="showEntry = true"
+        />
+        <SectionHyperlinkButton
+          class=""
+          label="View / edit"
+          variant="entries"
+          to="/entries"
+        />
+        <SectionHyperlinkButton
+          class=""
+          label="Tasks"
+          variant="tasks"
+          to="/tasks"
+        />
+        <SectionHyperlinkButton
+          class=""
+          label="Contact book"
+          variant="contacts"
+          to="/contacts"
+        />
+        <SectionHyperlinkButton
+          class=""
+          label="Upskill"
+          variant="upskill"
+          to="/resources"
+        />
+        <SectionHyperlinkButton
+          class=""
+          label="Job search tips"
+          variant="tips"
+          to="/tips"
         />
       </div>
     </div>
   </main>
+
+  <ApplicationEntry
+    v-if="showEntry"
+    @close="showEntry = false"
+    @saved="showEntry = false"
+  />
 </template>
 
 <style scoped>
 .home {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  box-sizing: border-box;
+  width: 100%;
   max-width: 960px;
   margin: 0 auto;
   padding: 2rem;
@@ -40,6 +78,10 @@ const sections = [
   flex-direction: column;
   align-items: center;
   gap: 3rem;
+}
+
+.analytics-wrapper {
+  width: 100%;
 }
 
 .section-grid {
